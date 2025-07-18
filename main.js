@@ -29,4 +29,9 @@ var app = new Vue({
             this.image = variantImage
         },
     },
+    computed: {
+        title() {
+            return this.brand + ' ' + this.product;
+        }
+    },
 })
