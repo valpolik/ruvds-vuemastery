@@ -13,17 +13,14 @@
         <div class="product">
 
             <div class="product-image">
-                <!-- <img src="" /> -->
-                <!-- <img v-bind:src="image" /> -->
-                <!-- <img v-bind:src="image" v-bind:alt="altText" /> -->
                 <img :src="image" />
             </div>
 
             <div class="product-info">
                 <h1>{{ title }}</h1>
                 <p v-if="inStock">In stock</p>
-                <p v-else :class="{ outOfStock: !inStock }">Out of Stock</p>
-                <p>{{ sale }}</p>
+                <p v-else>Out of Stock</p>
+                <p>Shipping: {{ shipping }}</p>
 
                 <ul>
                     <li v-for="detail in details">{{ detail }}</li>
