@@ -39,6 +39,12 @@
 
 //         </div>
 //     `,
+//     props: {
+//         premium: {
+//             type: Boolean,
+//             required: true,
+//         },
+//     },
 //     data() {
 //         return {
 //             product: "Socks",
@@ -80,6 +86,13 @@
 //         inStock() {
 //             return this.variants[this.selectedVariant].variantQuantity;
 //         },
+//         shipping() {
+//             if (this.premium) {
+//                 return "Free";
+//             } else {
+//                 return 2.99;
+//             };
+//         },
 //     },
 // };
 
@@ -88,6 +101,9 @@
 //     components: {
 //         'product': product,
 //     },
+//     data: {
+//         premium: true
+//     }
 // });
 
 Vue.component('product', {
@@ -131,6 +147,12 @@ Vue.component('product', {
 
         </div>
     `,
+    props: {
+        premium: {
+            type: Boolean,
+            required: true,
+        },
+    },
     data() {
         return {
             product: "Socks",
@@ -172,9 +194,19 @@ Vue.component('product', {
         inStock() {
             return this.variants[this.selectedVariant].variantQuantity;
         },
+        shipping() {
+            if (this.premium) {
+                return "Free";
+            } else {
+                return 2.99;
+            };
+        },
     },
 });
 
 var app = new Vue({
     el: '#app',
+    data: {
+        premium: true
+    }
 });
