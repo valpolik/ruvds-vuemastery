@@ -1,9 +1,23 @@
+// var productDetails = {
+//     template: `
+//         <ul>
+//             <li v-for="detail in details">{{ detail }}</li>
+//         </ul>
+//     `,
+//     props: {
+//         details: {
+//             type: Array,
+//             required: true,
+//         },
+//     },
+// };
+
 // var product = {
 //     template: `
 //         <div class="product">
 
 //             <div class="product-image">
-//                 <img :src="image" />
+//                 <img :src="image">
 //             </div>
 
 //             <div class="product-info">
@@ -12,9 +26,7 @@
 //                 <p v-else>Out of Stock</p>
 //                 <p>Shipping: {{ shipping }}</p>
 
-//                 <ul>
-//                     <li v-for="detail in details">{{ detail }}</li>
-//                 </ul>
+//                 <product-details :details="details"></product-details>
 
 //                 <div
 //                     class="color-box"
@@ -39,6 +51,9 @@
 
 //         </div>
 //     `,
+//     components: {
+//         'product-details': productDetails,
+//     },
 //     props: {
 //         premium: {
 //             type: Boolean,
@@ -106,12 +121,26 @@
 //     }
 // });
 
+Vue.component('product-details', {
+    template: `
+        <ul>
+            <li v-for="detail in details">{{ detail }}</li>
+        </ul>
+    `,
+    props: {
+        details: {
+            type: Array,
+            required: true,
+        },
+    },
+});
+
 Vue.component('product', {
     template: `
         <div class="product">
 
             <div class="product-image">
-                <img :src="image" />
+                <img :src="image">
             </div>
 
             <div class="product-info">
@@ -120,9 +149,7 @@ Vue.component('product', {
                 <p v-else>Out of Stock</p>
                 <p>Shipping: {{ shipping }}</p>
 
-                <ul>
-                    <li v-for="detail in details">{{ detail }}</li>
-                </ul>
+                <product-details :details="details"></product-details>
 
                 <div
                     class="color-box"
