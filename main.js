@@ -12,7 +12,7 @@ Vue.component('product', {
                 <p>Shipping: {{ shipping }}</p>
 
                 <ul>
-                    <li v-for="detail in details">{{ detail }}</li>
+                    <li v-for="(detail, index) in details" :key="index">{{ detail }}</li>
                 </ul>
 
                 <div
@@ -24,7 +24,7 @@ Vue.component('product', {
                 ></div>
 
                 <button
-                    v-on:click="addToCart"
+                    @click="addToCart"
                     :disabled="!inStock"
                     :class="{ disabledButton: !inStock }"
                 >
@@ -33,7 +33,7 @@ Vue.component('product', {
             </div>
 
             <div>
-                <h2>Reviews</h2>
+                <h2><font color="#3AC1EF">Reviews</font></h2>
                 <p v-if="!reviews.length">There are no reviews yet.</p>
                 <ul>
                     <li v-for="review in reviews">
@@ -120,7 +120,7 @@ Vue.component('product-review', {
 
             <p>
                 <label for="name">Name:</label>
-                <input id="name" v-model="name" placeholder="name">
+                <input id="name" v-model="name">
             </p>
 
             <p>
