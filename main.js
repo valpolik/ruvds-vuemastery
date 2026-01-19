@@ -175,6 +175,26 @@ Vue.component('product-review', {
     },
 });
 
+Vue.component('product-tabs', {
+    template: `
+    <div>
+        <ul>
+            <span class="tab"
+                v-for="(tab, index) in tabs"
+                @click="selectedTab = tab"
+                :class="{ activeTab: selectedTab === tab }"
+            >{{ tab }}</span>
+        </ul>
+    </div>
+    `,
+    data() {
+        return {
+            tabs: ['Reviews', 'Make a Review'],
+            selectedTab: 'Reviews',
+        };
+    },
+});
+
 var app = new Vue({
     el: '#app',
     data: {
