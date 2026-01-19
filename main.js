@@ -2,7 +2,7 @@ Vue.component('product', {
     template: `
         <div class="product">
             <div class="product-image">
-                <img :src="image">
+                <img :src="image" alt="">
             </div>
 
             <div class="product-info">
@@ -32,19 +32,7 @@ Vue.component('product', {
                 </button>
             </div>
 
-            <div>
-                <h2><font color="#3AC1EF">Reviews</font></h2>
-                <p v-if="!reviews.length">There are no reviews yet.</p>
-                <ul>
-                    <li v-for="review in reviews">
-                        <p>{{ review.name }}</p>
-                        <p>Rating: {{ review.rating }}</p>
-                        <p>{{ review.review }}</p>
-                    </li>
-                </ul>
-            </div>
-
-            <product-review @review-submitted="addReview"></product-review>
+            <product-tabs :reviews="reviews"></product-tabs>
         </div>
     `,
     props: {
@@ -185,8 +173,29 @@ Vue.component('product-tabs', {
                 :class="{ activeTab: selectedTab === tab }"
             >{{ tab }}</span>
         </ul>
+
+        <div v-show="selectedTab === 'Reviews'">
+            <p v-if="!reviews.length">There are no reviews yet.</p>
+            <ul>
+                <li v-for="review in reviews">
+                    <p>{{ review.name }}</p>
+                    <p>Rating: {{ review.rating }}</p>
+                    <p>{{ review.review }}</p>
+                </li>
+            </ul>
+        </div>
+
+        <div v-show="selectedTab === 'Make a Review'">
+            <product-review @review-submitted="addReview"></product-review>
+        </div>
     </div>
     `,
+    props: {
+        reviews: {
+            type: Array,
+            required: false,
+        },
+    },
     data() {
         return {
             tabs: ['Reviews', 'Make a Review'],
