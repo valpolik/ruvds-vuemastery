@@ -64,15 +64,17 @@ Vue.component('product', {
             reviews: [],
         };
     },
+    mounted() {
+        eventBus.$on('review-submitted', productReview => {
+            this.reviews.push(productReview);
+        });
+    },
     methods: {
         addToCart() {
             this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
         },
         updateProduct(index) {
             this.selectedVariant = index;
-        },
-        addReview(productReview) {
-            this.reviews.push(productReview);
         },
     },
     computed: {
@@ -150,7 +152,7 @@ Vue.component('product-review', {
                     review: this.review,
                     rating: this.rating,
                 };
-                this.$emit('review-submitted', productReview);
+                eventBus.$emit('review-submitted', productReview);
                 this.name = null;
                 this.review = null;
                 this.rating = null;
@@ -186,7 +188,7 @@ Vue.component('product-tabs', {
         </div>
 
         <div v-show="selectedTab === 'Make a Review'">
-            <product-review @review-submitted="addReview"></product-review>
+            <product-review></product-review>
         </div>
     </div>
     `,
@@ -203,6 +205,8 @@ Vue.component('product-tabs', {
         };
     },
 });
+
+var eventBus = new Vue();
 
 var app = new Vue({
     el: '#app',
